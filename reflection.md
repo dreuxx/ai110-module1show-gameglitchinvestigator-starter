@@ -34,10 +34,7 @@ Concrete bugs I noticed:
 
 ## 3. Debugging and testing your fixes
 
-- How did you decide whether a bug was really fixed?
-- Describe at least one test you ran (manual or using pytest)  
-  and what it showed you about your code.
-- Did AI help you design or understand any tests? How?
+I decided that the first logic error was fixed when `check_guess` stopped raising `NotImplementedError` and returned the expected result for equal, higher, and lower guesses. I ran `python3 -m pytest tests/test_game_logic.py`, and all three tests passed. The test run confirmed the implementation in `logic_utils.py`, but the remaining Streamlit state and hint bugs still need separate fixes and tests.
 
 ---
 
