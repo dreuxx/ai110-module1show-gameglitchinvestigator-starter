@@ -21,9 +21,10 @@ Concrete bugs I noticed:
 | Secret 50, guess 40 | Show a "Too Low" result and tell the player to go higher. | The result was "Too Low", but the hint said "Go LOWER!". | none |
 | Secret 50, guess 9 on an even-numbered attempt | Compare both values numerically and show "Too Low". | The values could be compared as strings, so the game showed "Too High". | none |
 | Win the game, then click "New Game" | Reset the status, score, attempts, history, and secret for a new playable game. | The old won status remained, so the game displayed "You already won. Start a new game to play again.". | none |
-| Secret 50, one wrong guess followed by a correct guess | Award 60 points because the correct guess is on attempt 2. | The old formula awarded 70 points on attempt 2, so it did not reduce the score by 20 points each attempt. | none |
+| New Game, then correct guess immediately | Reset attempts to 0 and award 100 points for the first valid guess. | The previous formula awarded 80 points even after the new game reset. | none |
 | Easy difficulty, guess 21 | Reject the guess because Easy allows only 1 through 20, without consuming an attempt. | The out-of-range guess was accepted for comparison. | none |
 | Enter 40, then click "New Game" | Start with an empty guess field in the new game. | The previous guess remained in the input field. | none |
+| Three incorrect guesses | End the game with a game-over message after attempt 3. | The old difficulty limits allowed more than three attempts. | none |
 
 ---
 
@@ -41,7 +42,7 @@ I decided that the first logic error was fixed when `check_guess` stopped raisin
 
 ---
 
-The latest fix gives each game a new text-input key, so the previous guess is cleared after `New Game`; the Streamlit check passed. I also expanded the unit tests for difficulty ranges, parsing, and inclusive boundaries, bringing the full suite to 8 passed.
+The latest fix gives each game a new text-input key, so the previous guess is cleared after `New Game`; the Streamlit check passed. I also expanded the unit tests for difficulty ranges, parsing, and inclusive boundaries, bringing the full suite to 8 passed. The final scoring rule is that `New Game` starts with zero attempts and zero score, a first valid guess awards 100 points, and each later attempt reduces the reward by 20 points. Finally, I set the game-over limit to three incorrect guesses and verified that the third failure changes the status to `lost` and blocks a fourth submission.
 
 ## 4. What did you learn about Streamlit and state?
 

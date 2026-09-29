@@ -42,9 +42,9 @@ def test_guess_too_low():
 
 
 def test_score_decreases_by_twenty_per_attempt():
-    assert update_score(0, "Win", 1) == 80
-    assert update_score(0, "Win", 2) == 60
-    assert update_score(0, "Win", 3) == 40
+    assert update_score(0, "Win", 1) == 100
+    assert update_score(0, "Win", 2) == 80
+    assert update_score(0, "Win", 3) == 60
 
 
 def test_incorrect_guess_does_not_change_score():
