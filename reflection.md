@@ -4,19 +4,23 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 
 ## 1. What was broken when you started?
 
-- What did the game look like the first time you ran it?
-- List at least two concrete bugs you noticed at the start  
-  (for example: "the hints were backwards").
+When I first ran the game, it displayed a number guessing interface with a developer panel that revealed the secret number. The hint direction was backwards: a guess above the secret told me to go higher, and a guess below the secret told me to go lower. I also found that some guesses were compared as text instead of numbers, which could produce the wrong result, and starting a new game did not fully reset the previous game state.
+
+Concrete bugs I noticed:
+
+- With a secret of 50 and a guess of 60, I expected a "Too High" result with a "Go LOWER" hint, but the game displayed "Go HIGHER!".
+- With a secret of 50 and a guess of 40, I expected a "Too Low" result with a "Go HIGHER" hint, but the game displayed "Go LOWER!".
+- On an even-numbered attempt, a guess of 9 with a secret of 50 could be compared as the strings "9" and "50", causing the game to report "Too High" instead of "Too Low".
+- After winning, clicking "New Game" was expected to start a fresh playable round, but the previous won status remained and the game continued to say that I had already won.
 
 **Bug Reproduction Log**
 
-Document at least 3 bugs you found. Add rows as needed.
-
-| Input | Expected Behavior | Actual Behavior | Console Output / Error |
-|-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
+| Input Used | Expected Behavior | Actual Behavior | Console Error / Output |
+|------------|-------------------|-----------------|------------------------|
+| Secret 50, guess 60 | Show a "Too High" result and tell the player to go lower. | The result was "Too High", but the hint said "Go HIGHER!". | none |
+| Secret 50, guess 40 | Show a "Too Low" result and tell the player to go higher. | The result was "Too Low", but the hint said "Go LOWER!". | none |
+| Secret 50, guess 9 on an even-numbered attempt | Compare both values numerically and show "Too Low". | The values could be compared as strings, so the game showed "Too High". | none |
+| Win the game, then click "New Game" | Reset the status, score, attempts, history, and secret for a new playable game. | The old won status remained, so the game displayed "You already won. Start a new game to play again.". | none |
 
 ---
 
