@@ -34,7 +34,7 @@ Concrete bugs I noticed:
 
 ## 3. Debugging and testing your fixes
 
-I decided that the first logic error was fixed when `check_guess` stopped raising `NotImplementedError` and returned the expected result for equal, higher, and lower guesses. I ran `python3 -m pytest tests/test_game_logic.py`, and all three tests passed. The test run confirmed the implementation in `logic_utils.py`, but the remaining Streamlit state and hint bugs still need separate fixes and tests.
+I decided that the first logic error was fixed when `check_guess` stopped raising `NotImplementedError` and returned the expected result for equal, higher, and lower guesses. I ran `python3 -m pytest tests/test_game_logic.py`, and all three tests passed. I then corrected the reversed hint messages in `app.py` and used Streamlit's app test runner with a secret of 50 and guesses of 60 and 40; both hints were correct, and the full test suite still reported 3 passed. The remaining Streamlit state and type-comparison bugs still need separate fixes and tests.
 
 ---
 
